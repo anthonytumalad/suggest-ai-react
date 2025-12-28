@@ -5,6 +5,8 @@ import type { AxiosInstance, AxiosError } from 'axios'
 const axiosInstance: AxiosInstance = axios.create({
     baseURL: import.meta.env.VITE_API_URL || 'https://suggest-ai.on-forge.com',
     withCredentials: true,
+    xsrfCookieName: 'XSRF-TOKEN',
+    xsrfHeaderName: 'X-XSRF-TOKEN',
     headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
