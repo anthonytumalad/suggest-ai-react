@@ -1,6 +1,6 @@
 export default function ViewAddForm() {
   return (
-    <div className="flex justify-center min-h-screen">
+    <div className="flex justify-center min-h-screen p-10 bg-gray-50">
       <div className="w-full max-w-xl space-y-6">
         
         {/* Page Header Card */}
