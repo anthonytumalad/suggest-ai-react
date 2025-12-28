@@ -9,7 +9,7 @@ export class AuthService {
     async init(): Promise<void> {
         if (!this.csrfInitialized) {
             try {
-                await axiosInstance.get(API_ENDPOINTS.auth.csrf)
+                await axiosInstance.get(API_ENDPOINTS.auth.csrf, { withCredentials: true })
                 this.csrfInitialized = true
             } catch (error: any) {
                 console.error('CSRF init failed:', error?.message ?? error)
@@ -24,7 +24,8 @@ export class AuthService {
 
             const response = await axiosInstance.post<{ message: string; user: User; }>(
                 API_ENDPOINTS.auth.login, 
-                { email, password }
+                { email, password },
+                { withCredentials: true }
             )
 
             return response.data.user
