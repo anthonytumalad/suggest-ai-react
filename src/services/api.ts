@@ -1,8 +1,7 @@
 export const API_ENDPOINTS = {
     auth: {
-        csrf: '/sanctum/csrf-cookie',
-        login: '/login',
-        register: '/register',
+        login: '/api/login',
+        register: '/api/register',
         me: '/api/me',
         logout: '/api/logout'
     },

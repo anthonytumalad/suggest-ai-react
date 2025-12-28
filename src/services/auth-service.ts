@@ -4,19 +4,11 @@ import type { User } from "../utilities/interfaces/auth-interface"
 
 export class AuthService {
 
-    private csrfInitialized = false
-
-    async init(): Promise<void> {
-        if (!this.csrfInitialized) {
-            await axiosInstance.get(API_ENDPOINTS.auth.csrf, { withCredentials: true })
-            this.csrfInitialized = true
-        }
-    }
-
     async login( email: string, password: string ): Promise<User> {
-        await this.init()
-
-        const response = await axiosInstance.post<{ message: string; user: User; }>(
+        const response = await axiosInstance.post<{ 
+            message: string
+            user: User
+        }>(
             API_ENDPOINTS.auth.login, 
             { email, password },
             { withCredentials: true }
@@ -26,19 +18,25 @@ export class AuthService {
     }
 
     async logout(): Promise<void> {
-        await axiosInstance.post(API_ENDPOINTS.auth.logout)
-        this.csrfInitialized = false
+        await axiosInstance.post(
+            API_ENDPOINTS.auth.logout,
+            {},
+            { withCredentials: true }
+        )
     }
 
     async getCurrentUser(): Promise<User | null> {
         try {
-            const response = await axiosInstance.get<{ user: User }>(API_ENDPOINTS.auth.me);
+            const response = await axiosInstance.get<{ user: User }>(
+                API_ENDPOINTS.auth.me,
+                { withCredentials: true }
+            )
             return response.data.user
         } catch (error: any) {
             if (error.response?.status === 401) {
                 return null
             }
-            throw error;
+            throw error
         }
     }
 
