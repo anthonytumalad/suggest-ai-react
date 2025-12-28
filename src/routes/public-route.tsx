@@ -6,7 +6,7 @@ const PublicRoute: React. FC = () => {
 
     if (loading) return null
 
-    return user ? <Navigate to="/app" replace /> : <Outlet />
+    return user ? <Navigate to="/dashboard" replace /> : <Outlet />
 }
 
 export { PublicRoute }

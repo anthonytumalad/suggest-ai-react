@@ -10,7 +10,7 @@ const ProtectedRoute: React.FC = () => {
         return <Outlet />;
     }
 
-    return <Navigate to="/dashboard" replace />
+    return <Navigate to="/login" replace />
 }
 
 export { ProtectedRoute }
