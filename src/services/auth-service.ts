@@ -8,40 +8,26 @@ export class AuthService {
 
     async init(): Promise<void> {
         if (!this.csrfInitialized) {
-            try {
-                await axiosInstance.get(API_ENDPOINTS.auth.csrf, { withCredentials: true })
-                this.csrfInitialized = true
-            } catch (error: any) {
-                console.error('CSRF init failed:', error?.message ?? error)
-                throw error
-            }
+            await axiosInstance.get(API_ENDPOINTS.auth.csrf, { withCredentials: true })
+            this.csrfInitialized = true
         }
     }
 
     async login( email: string, password: string ): Promise<User> {
-        try {
-            await this.init()
+        await this.init()
 
-            const response = await axiosInstance.post<{ message: string; user: User; }>(
-                API_ENDPOINTS.auth.login, 
-                { email, password },
-                { withCredentials: true }
-            )
+        const response = await axiosInstance.post<{ message: string; user: User; }>(
+            API_ENDPOINTS.auth.login, 
+            { email, password },
+            { withCredentials: true }
+        )
 
-            return response.data.user
-        } catch (error: any) {
-            console.error('Login failed:', error)
-            throw error
-        }
+        return response.data.user
     }
 
     async logout(): Promise<void> {
-        try {
-            await axiosInstance.post(API_ENDPOINTS.auth.logout)
-        } 
-        finally {
-            this.csrfInitialized = false
-        }
+        await axiosInstance.post(API_ENDPOINTS.auth.logout)
+        this.csrfInitialized = false
     }
 
     async getCurrentUser(): Promise<User | null> {

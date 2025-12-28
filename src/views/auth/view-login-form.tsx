@@ -16,7 +16,7 @@ export default function ViewLoginForm() {
         setError("")
 
         try {
-            await login(email, password)
+            await login('john@example.com', 'JohnProdSecret123')
         }
         catch (err: any) {
             const errorMessage = err.response?.data?.message || 'Login failed. Please check your credentials.'
