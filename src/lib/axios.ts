@@ -1,9 +1,8 @@
 import axios from "axios"
 import type { AxiosInstance } from 'axios'
 
-
 const axiosInstance: AxiosInstance = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || 'https://suggest-ai.on-forge.com',
+    baseURL: import.meta.env.VITE_API_URL,
     withCredentials: true,
     headers: {
         'Accept': 'application/json',
