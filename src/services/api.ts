@@ -15,6 +15,7 @@ export const API_ENDPOINTS = {
         export: (slug: string, format: 'csv' | 'excel' | 'pdf' | 'clipboard') => 
             `/api/forms/${slug}/export/${format}`,
         saveSummary: (slug: string) => `/api/forms/${slug}/summary`,
+        charts: (slug: string) => `/api/feedback-summary/${slug}/chart`
     },
     grok: {
         analyze: '/api/summarize-feedback',
